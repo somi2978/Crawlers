@@ -7,7 +7,7 @@ import datetime
 def Recipe10000(result):
     for page in range(1,3):  ## 1~2 페이지 추출
         Recipe_url ='https://www.10000recipe.com/issue/view.html?cid=gdubu33&types=magazine&page='+str(page)
-        print(Recipe_url)
+        
         html = urllib.request.urlopen(Recipe_url)
         soupRecipe=BeautifulSoup(html, 'html.parser')
         ThemeList = soupRecipe.find('div',attrs={'class':'theme_list'}) 
@@ -22,8 +22,7 @@ def Recipe10000(result):
 #[CODE 2]
 def main():
     result=[]
-    print('Recipe 10000 crawling start')
-    Recipe10000(result)
+    Recipe10000(result)  # Recipe 10000 crawling start
     recipe_tbl = pd.DataFrame(result, columns = ('레시피 명','썸네일 이미지 url'))
     recipe_tbl.to_csv('./10000recipe.csv',encoding='cp949',mode='w',index=True)
     del result[:]
